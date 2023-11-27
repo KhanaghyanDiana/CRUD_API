@@ -1,0 +1,35 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "Assignment: CRUD API",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write \"crud-api/*.js\"",
+    "start:dev": "nodemon index.js",
+    "start:prod": "run build",
+    "test": "jest --silent ",
+    "test:verbose": "jest "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-jest": "^29.6.3",
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.1",
+    "nvm": "^0.0.4",
+    "prettier": "^3.1.0",
+    "supertest": "^6.3.3",
+    "ts-node": "^10.9.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.3",
+    "@babel/preset-env": "^7.23.3",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.2"
+  }
+}
