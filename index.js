@@ -8,7 +8,7 @@ const numCPUs = os.cpus().length;
 const Port = process.env.PORT
 
 export let server
-const isMulti = process.argv.includes("--multi")
+
 
   if(cluster.isPrimary){
     primary()
