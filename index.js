@@ -5,21 +5,15 @@ import cluster from "cluster";
 import * as os from 'os';
 dotenv.config()
 const numCPUs = os.cpus().length;
-const Port = process.env.PORT
+const Port = Number(process.env.PORT)
 
 export let server
+const multi = process.argv.includes('--multi')
 
-
-  if(cluster.isPrimary){
+if(cluster.isPrimary){
     primary()
   }else{
-    isWorker()
-
-  server = http.createServer((req, res)=>handleRequest(req, res))
-  server.listen(Port, ()=>{
-    console.log(`Port is Running`);
-  } )
-
+    isWorker(multi)
 }
 
 function primary(){
@@ -44,15 +38,25 @@ function primary(){
 
 }
 
-function isWorker (){
-  server = http.createServer((req, res)=>handleRequest(req, res))
-    server.listen(Port ,  Port + 1, () => {
-      console.log(
-        `Worker ${cluster?.worker.id} is listening on port ${
-          4000 + cluster?.worker.id
-        }`
-      );
-    });
+function isWorker (arg){
+if(arg){
+  server = http.createServer((req, res)=>handleRequest(req, res));
+  server.listen(Port +1 ,   () => {
+    console.log(
+      `Worker ${cluster?.worker.id} is listening on port ${
+        Port + cluster?.worker.id
+      }`
+    );
+  });
+}else{
+  server = http.createServer((req, res)=>handleRequest(req, res));
+  server.listen(Port  ,   () => {
+    console.log(
+      `Port is running`
+    );
+  });
+}
+
 
 }
 
